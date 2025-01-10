@@ -1,0 +1,70 @@
+﻿<Page x:Class="PCInventory.Pages.PageAuth"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PCInventory.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200" 
+      Title="PageAuth">
+
+    <Grid>
+        <Image Source="/Resources/ImgBackgroundAuth.png"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Stretch="UniformToFill">
+            <Image.Effect>
+                <BlurEffect Radius="25"/>
+            </Image.Effect>
+        </Image>
+        
+        <Grid Background="#acadd2"
+                Opacity="0.5"/>
+        
+        <Border Style="{StaticResource BrdAuth}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Source="/Resources/LogoPCI.png"
+                            Width="125"/>
+                    <Label Content="PC Inventory"
+                            Style="{StaticResource LblLogo}"/>
+                </WrapPanel>
+                
+                <Separator/>
+
+                <TextBlock Text="АВТОРИЗАЦИЯ"
+                            Style="{StaticResource TxblTitle}"/>
+                
+                <WrapPanel Margin="5">
+                    <TextBlock Text="Логин"
+                                Style="{StaticResource TxblLogPass}"/>
+                    <Grid>
+                        <TextBlock Text="Введите логин"
+                                    Style="{StaticResource TxBlLogin}"/>
+                        <TextBox x:Name="TxBoxLogin"
+                                    Style="{StaticResource TxBoxLogin}"/>
+                    </Grid>
+                    
+                </WrapPanel>
+                
+                <WrapPanel Margin="5">
+                    <TextBlock Text="Пароль"
+                                    Style="{StaticResource TxblLogPass}"/>
+                    <Grid>
+                        <TextBlock x:Name="TxBlPassword"
+                                    Text="Введите пароль"
+                                    Style="{StaticResource TxBlPassword}"/>
+                        <PasswordBox x:Name="PsBoxPassword"
+                                        PasswordChanged="PsBoxPassword_PasswordChanged"
+                                        Style="{StaticResource PsBoxPassword}"/>
+                    </Grid>
+                    
+                </WrapPanel>
+
+                <Button x:Name="BtnSingIn" Click="BtnSingIn_Click"
+                            Content="Войти" 
+                            Style="{StaticResource BtnSignIn}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

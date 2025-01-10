@@ -1,0 +1,157 @@
+﻿<Page x:Class="PCInventory.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PCInventory.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1300"
+      Title="MainPage">
+
+    
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#53699E">
+            <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Resources/LogoPCI.png"
+                        Width="75"/>
+                <Label Content="PC Inventory"
+                        Style="{StaticResource LblLogo}"/>
+            </WrapPanel>
+        </Grid>
+
+        <Grid Grid.Row="1"
+                Background="#53699E">
+            
+            <StackPanel Grid.Row="1">
+                <Border Style="{StaticResource BrdMenu}">
+                    <StackPanel>
+                        <Label Content="Техника"
+                                Style="{StaticResource LblMenuTitle}"/>
+
+                        <Button x:Name="BtnDevice" Click="BtnDevice_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgDevice.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Оборудование"
+                                            Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnDeviceType" Click="BtnDeviceType_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgDeviceType.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Тип оборудования"
+                                            Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnPlaceInstall" Click="BtnPlaceInstall_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgPlaceInstall.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Место установки"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource BrdMenu}"
+                        Margin="5">
+                    <StackPanel>
+                        <Label Content="Отделы"
+                                Style="{StaticResource LblMenuTitle}"/>
+                        
+                        <Button x:Name="BtnUser" Click="BtnUser_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgUser.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Сотрудники"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnWorkplace" Click="BtnWorkplace_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgWorkplace.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Рабочие места"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource BrdMenu}">
+                    <StackPanel>
+                        <Label Content="Учет техники"
+                                Style="{StaticResource LblMenuTitle}"/>
+
+                        <Button x:Name="BtnDevMoved" Click="BtnDevMoved_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgDevMoved.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Перемещение оборудования"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnDevDrop" Click="BtnDevDrop_Click"
+                                    Style="{StaticResource BtnMenu}">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="/Resources/ImgDevDroped.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                                <TextBlock Text="Списание оборудования"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+
+                <Button x:Name="BtnExit" Click="BtnExit_Click"
+                                    Style="{StaticResource BtnMenu}">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Image Source="/Resources/ImgExit.png"
+                                        Style="{StaticResource ImgMenu}"/>
+                        <TextBlock Text="Выход"
+                                        Style="{StaticResource TxtBlMenu}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Frame x:Name="SecondFrame" 
+                NavigationUIVisibility="Hidden"
+                Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                >
+        </Frame>
+        
+        <Border Height="1080" Width="2" Grid.RowSpan="2" Grid.Column="1"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Background="#FFC5D3E4"/>
+        
+        <Border Height="2" Width="1920" Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Background="#FFC5D3E4"/>
+    </Grid>
+</Page>

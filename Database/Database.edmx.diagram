@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="370f12c15d0b4e84b423638f36c9b56a" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.Device" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.DeviceDroping" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.DeviceMoving" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.DeviceStatus" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.DeviceType" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PlaceInstall" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Role" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Workplace" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_Device_DeviceStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Device_DeviceType" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Device_PlaceInstall" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceDroping_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceMoving_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceDroping_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceDroping_Workplace" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceMoving_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PlaceInstall_Workplace" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_User_Workplace" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_DeviceMoving_Workplace" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

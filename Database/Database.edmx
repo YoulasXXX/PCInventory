@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище DatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceTypeID" Type="int" Nullable="false" />
+          <Property Name="DeviceModel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceInventNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceSerialNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceDatePurchase" Type="date" Nullable="false" />
+          <Property Name="DevicePrice" Type="money" Nullable="false" />
+          <Property Name="DeviceStatusID" Type="int" Nullable="false" />
+          <Property Name="PlaceInstallID" Type="int" />
+        </EntityType>
+        <EntityType Name="DeviceDroping">
+          <Key>
+            <PropertyRef Name="DeviceDropingID" />
+          </Key>
+          <Property Name="DeviceDropingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceDropingDate" Type="date" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WorkplaceID" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="DeviceDropingDefect" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DeviceMoving">
+          <Key>
+            <PropertyRef Name="DeviceMovingID" />
+          </Key>
+          <Property Name="DeviceMovingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceMovingDate" Type="date" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WorkplaceID" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceStatus">
+          <Key>
+            <PropertyRef Name="DeviceStatusID" />
+          </Key>
+          <Property Name="DeviceStatusID" Type="int" Nullable="false" />
+          <Property Name="DeviceStatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceStatusDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="DeviceTypeID" />
+          </Key>
+          <Property Name="DeviceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaceInstall">
+          <Key>
+            <PropertyRef Name="PlaceInstallID" />
+          </Key>
+          <Property Name="PlaceInstallID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkplaceID" Type="int" Nullable="false" />
+          <Property Name="PlaceInstallCabinet" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlaceInstallDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPatronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserWorkplaceID" Type="int" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workplace">
+          <Key>
+            <PropertyRef Name="WorkplaceID" />
+          </Key>
+          <Property Name="WorkplaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkplaceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Device_DeviceStatus">
+          <End Role="DeviceStatus" Type="Self.DeviceStatus" Multiplicity="1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceStatus">
+              <PropertyRef Name="DeviceStatusID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DeviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_DeviceType">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="DeviceTypeID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DeviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_PlaceInstall">
+          <End Role="PlaceInstall" Type="Self.PlaceInstall" Multiplicity="0..1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceInstall">
+              <PropertyRef Name="PlaceInstallID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="PlaceInstallID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceMoving_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceMoving" Type="Self.DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceMoving_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DeviceMoving" Type="Self.DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceMoving_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="DeviceMoving" Type="Self.DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceInstall_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="PlaceInstall" Type="Self.PlaceInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="PlaceInstall">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserWorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DatabaseModelContainer">
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceDroping" EntityType="Self.DeviceDroping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceMoving" EntityType="Self.DeviceMoving" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceType" EntityType="Self.DeviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceInstall" EntityType="Self.PlaceInstall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workplace" EntityType="Self.Workplace" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Device_DeviceStatus" Association="Self.FK_Device_DeviceStatus">
+            <End Role="DeviceStatus" EntitySet="DeviceStatus" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_DeviceType" Association="Self.FK_Device_DeviceType">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_PlaceInstall" Association="Self.FK_Device_PlaceInstall">
+            <End Role="PlaceInstall" EntitySet="PlaceInstall" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_Device" Association="Self.FK_DeviceDroping_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_User" Association="Self.FK_DeviceDroping_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_Workplace" Association="Self.FK_DeviceDroping_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_Device" Association="Self.FK_DeviceMoving_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_User" Association="Self.FK_DeviceMoving_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_Workplace" Association="Self.FK_DeviceMoving_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceInstall_Workplace" Association="Self.FK_PlaceInstall_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="PlaceInstall" EntitySet="PlaceInstall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Workplace" Association="Self.FK_User_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceInventNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceSerialNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceDatePurchase" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DevicePrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DeviceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="PlaceInstallID" Type="Int32" />
+          <NavigationProperty Name="DeviceStatus" Relationship="Self.FK_Device_DeviceStatus" FromRole="Device" ToRole="DeviceStatus" />
+          <NavigationProperty Name="DeviceType" Relationship="Self.FK_Device_DeviceType" FromRole="Device" ToRole="DeviceType" />
+          <NavigationProperty Name="PlaceInstall" Relationship="Self.FK_Device_PlaceInstall" FromRole="Device" ToRole="PlaceInstall" />
+          <NavigationProperty Name="DeviceDroping" Relationship="Self.FK_DeviceDroping_Device" FromRole="Device" ToRole="DeviceDroping" />
+          <NavigationProperty Name="DeviceMoving" Relationship="Self.FK_DeviceMoving_Device" FromRole="Device" ToRole="DeviceMoving" />
+        </EntityType>
+        <EntityType Name="DeviceDroping">
+          <Key>
+            <PropertyRef Name="DeviceDropingID" />
+          </Key>
+          <Property Name="DeviceDropingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceDropingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="WorkplaceID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceDropingDefect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_DeviceDroping_Device" FromRole="DeviceDroping" ToRole="Device" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DeviceDroping_User" FromRole="DeviceDroping" ToRole="User" />
+          <NavigationProperty Name="Workplace" Relationship="Self.FK_DeviceDroping_Workplace" FromRole="DeviceDroping" ToRole="Workplace" />
+        </EntityType>
+        <EntityType Name="DeviceMoving">
+          <Key>
+            <PropertyRef Name="DeviceMovingID" />
+          </Key>
+          <Property Name="DeviceMovingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceMovingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_DeviceMoving_Device" FromRole="DeviceMoving" ToRole="Device" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DeviceMoving_User" FromRole="DeviceMoving" ToRole="User" />
+          <Property Name="WorkplaceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workplace" Relationship="DatabaseModel.FK_DeviceMoving_Workplace" FromRole="DeviceMoving" ToRole="Workplace" />
+        </EntityType>
+        <EntityType Name="DeviceStatus">
+          <Key>
+            <PropertyRef Name="DeviceStatusID" />
+          </Key>
+          <Property Name="DeviceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceStatusDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_Device_DeviceStatus" FromRole="DeviceStatus" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="DeviceTypeID" />
+          </Key>
+          <Property Name="DeviceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_Device_DeviceType" FromRole="DeviceType" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="PlaceInstall">
+          <Key>
+            <PropertyRef Name="PlaceInstallID" />
+          </Key>
+          <Property Name="PlaceInstallID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkplaceID" Type="Int32" Nullable="false" />
+          <Property Name="PlaceInstallCabinet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceInstallDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_Device_PlaceInstall" FromRole="PlaceInstall" ToRole="Device" />
+          <NavigationProperty Name="Workplace" Relationship="Self.FK_PlaceInstall_Workplace" FromRole="PlaceInstall" ToRole="Workplace" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserWorkplaceID" Type="Int32" Nullable="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DeviceDroping" Relationship="Self.FK_DeviceDroping_User" FromRole="User" ToRole="DeviceDroping" />
+          <NavigationProperty Name="DeviceMoving" Relationship="Self.FK_DeviceMoving_User" FromRole="User" ToRole="DeviceMoving" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Workplace" Relationship="Self.FK_User_Workplace" FromRole="User" ToRole="Workplace" />
+        </EntityType>
+        <EntityType Name="Workplace">
+          <Key>
+            <PropertyRef Name="WorkplaceID" />
+          </Key>
+          <Property Name="WorkplaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkplaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DeviceDroping" Relationship="Self.FK_DeviceDroping_Workplace" FromRole="Workplace" ToRole="DeviceDroping" />
+          <NavigationProperty Name="PlaceInstall" Relationship="Self.FK_PlaceInstall_Workplace" FromRole="Workplace" ToRole="PlaceInstall" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Workplace" FromRole="Workplace" ToRole="User" />
+          <NavigationProperty Name="DeviceMoving" Relationship="DatabaseModel.FK_DeviceMoving_Workplace" FromRole="Workplace" ToRole="DeviceMoving" />
+        </EntityType>
+        <Association Name="FK_Device_DeviceStatus">
+          <End Role="DeviceStatus" Type="Self.DeviceStatus" Multiplicity="1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceStatus">
+              <PropertyRef Name="DeviceStatusID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DeviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_DeviceType">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="DeviceTypeID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DeviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_PlaceInstall">
+          <End Role="PlaceInstall" Type="Self.PlaceInstall" Multiplicity="0..1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceInstall">
+              <PropertyRef Name="PlaceInstallID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="PlaceInstallID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceMoving_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceMoving" Type="Self.DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDroping_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="DeviceDroping" Type="Self.DeviceDroping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="DeviceDroping">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceMoving_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DeviceMoving" Type="Self.DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceInstall_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="PlaceInstall" Type="Self.PlaceInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="PlaceInstall">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Workplace">
+          <End Role="Workplace" Type="Self.Workplace" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserWorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Device" EntityType="Self.Device" />
+          <EntitySet Name="DeviceDroping" EntityType="Self.DeviceDroping" />
+          <EntitySet Name="DeviceMoving" EntityType="Self.DeviceMoving" />
+          <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" />
+          <EntitySet Name="DeviceType" EntityType="Self.DeviceType" />
+          <EntitySet Name="PlaceInstall" EntityType="Self.PlaceInstall" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Workplace" EntityType="Self.Workplace" />
+          <AssociationSet Name="FK_Device_DeviceStatus" Association="Self.FK_Device_DeviceStatus">
+            <End Role="DeviceStatus" EntitySet="DeviceStatus" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_DeviceType" Association="Self.FK_Device_DeviceType">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_PlaceInstall" Association="Self.FK_Device_PlaceInstall">
+            <End Role="PlaceInstall" EntitySet="PlaceInstall" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_Device" Association="Self.FK_DeviceDroping_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_Device" Association="Self.FK_DeviceMoving_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_User" Association="Self.FK_DeviceDroping_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDroping_Workplace" Association="Self.FK_DeviceDroping_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="DeviceDroping" EntitySet="DeviceDroping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_User" Association="Self.FK_DeviceMoving_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceInstall_Workplace" Association="Self.FK_PlaceInstall_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="PlaceInstall" EntitySet="PlaceInstall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Workplace" Association="Self.FK_User_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceMoving_Workplace" Association="DatabaseModel.FK_DeviceMoving_Workplace">
+            <End Role="Workplace" EntitySet="Workplace" />
+            <End Role="DeviceMoving" EntitySet="DeviceMoving" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_DeviceMoving_Workplace">
+          <End Type="DatabaseModel.Workplace" Role="Workplace" Multiplicity="1" />
+          <End Type="DatabaseModel.DeviceMoving" Role="DeviceMoving" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workplace">
+              <PropertyRef Name="WorkplaceID" />
+            </Principal>
+            <Dependent Role="DeviceMoving">
+              <PropertyRef Name="WorkplaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Device">
+            <EntityTypeMapping TypeName="DatabaseModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DeviceTypeID" ColumnName="DeviceTypeID" />
+                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
+                <ScalarProperty Name="DeviceInventNum" ColumnName="DeviceInventNum" />
+                <ScalarProperty Name="DeviceSerialNum" ColumnName="DeviceSerialNum" />
+                <ScalarProperty Name="DeviceDatePurchase" ColumnName="DeviceDatePurchase" />
+                <ScalarProperty Name="DevicePrice" ColumnName="DevicePrice" />
+                <ScalarProperty Name="DeviceStatusID" ColumnName="DeviceStatusID" />
+                <ScalarProperty Name="PlaceInstallID" ColumnName="PlaceInstallID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceDroping">
+            <EntityTypeMapping TypeName="DatabaseModel.DeviceDroping">
+              <MappingFragment StoreEntitySet="DeviceDroping">
+                <ScalarProperty Name="DeviceDropingID" ColumnName="DeviceDropingID" />
+                <ScalarProperty Name="DeviceDropingDate" ColumnName="DeviceDropingDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DeviceDropingDefect" ColumnName="DeviceDropingDefect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceMoving">
+            <EntityTypeMapping TypeName="DatabaseModel.DeviceMoving">
+              <MappingFragment StoreEntitySet="DeviceMoving">
+                <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
+                <ScalarProperty Name="DeviceMovingID" ColumnName="DeviceMovingID" />
+                <ScalarProperty Name="DeviceMovingDate" ColumnName="DeviceMovingDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceStatus">
+            <EntityTypeMapping TypeName="DatabaseModel.DeviceStatus">
+              <MappingFragment StoreEntitySet="DeviceStatus">
+                <ScalarProperty Name="DeviceStatusID" ColumnName="DeviceStatusID" />
+                <ScalarProperty Name="DeviceStatusName" ColumnName="DeviceStatusName" />
+                <ScalarProperty Name="DeviceStatusDescription" ColumnName="DeviceStatusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceType">
+            <EntityTypeMapping TypeName="DatabaseModel.DeviceType">
+              <MappingFragment StoreEntitySet="DeviceType">
+                <ScalarProperty Name="DeviceTypeID" ColumnName="DeviceTypeID" />
+                <ScalarProperty Name="DeviceTypeName" ColumnName="DeviceTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceInstall">
+            <EntityTypeMapping TypeName="DatabaseModel.PlaceInstall">
+              <MappingFragment StoreEntitySet="PlaceInstall">
+                <ScalarProperty Name="PlaceInstallID" ColumnName="PlaceInstallID" />
+                <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
+                <ScalarProperty Name="PlaceInstallCabinet" ColumnName="PlaceInstallCabinet" />
+                <ScalarProperty Name="PlaceInstallDescription" ColumnName="PlaceInstallDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DatabaseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="DatabaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserWorkplaceID" ColumnName="UserWorkplaceID" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workplace">
+            <EntityTypeMapping TypeName="DatabaseModel.Workplace">
+              <MappingFragment StoreEntitySet="Workplace">
+                <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
+                <ScalarProperty Name="WorkplaceName" ColumnName="WorkplaceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

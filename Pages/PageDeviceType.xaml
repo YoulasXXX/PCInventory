@@ -1,0 +1,78 @@
+﻿<Page x:Class="PCInventory.Pages.PageTypeDevices"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PCInventory.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="950"
+      Title="PageTypeDevices">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#53699e" x:Name="GrdHeader">
+
+            <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Content="Тип оборудования"
+                        Style="{StaticResource LblDevices}"/>
+            </WrapPanel>
+
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+
+                <Button x:Name="BtnAdd" Click="BtnAdd_Click"
+                            Style="{StaticResource BtnPages}">
+                    <Image Source="/Resources/ImgAdd.png"
+                            Style="{StaticResource ImgMenu}"/>
+                </Button>
+
+                <Button x:Name="BtnEdit" Click="BtnEdit_Click"
+                            Style="{StaticResource BtnPages}">
+                    <Image Source="/Resources/ImgEdit.png"
+                            Style="{StaticResource ImgMenu}"/>
+                </Button>
+
+                <Button x:Name="BtnDelete" Click="BtnDelete_Click"
+                            Style="{StaticResource BtnPages}">
+                    <Image Source="/Resources/ImgDelete.png"
+                            Style="{StaticResource ImgMenu}"/>
+                </Button>
+
+                <Grid>
+                    <TextBlock Text="Поиск..."
+                                Style="{StaticResource TxBlSearch}"/>
+                    <Image Source="/Resources/ImgSearch.png"
+                            Style="{StaticResource ImgSearch}"/>
+                    <TextBox x:Name="TxbSearch"
+                                TextChanged="TxbSearch_TextChanged"
+                                Style="{StaticResource TxBoxSearch}"/>
+
+                </Grid>
+
+            </WrapPanel>
+
+        </Grid>
+
+        <Grid Background="#53699E"
+                Grid.Row="1"
+                Height="Auto">
+            <DataGrid x:Name="DataGridDeviceType"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                        Height="Auto" Width="Auto"
+                        RowStyle="{DynamicResource DataGridRowStyle1}" 
+                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                        CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Наименование"
+                                Binding="{Binding DeviceTypeName}"
+                                Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+    </Grid>
+</Page>

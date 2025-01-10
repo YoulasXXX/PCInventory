@@ -1,0 +1,187 @@
+﻿<Page x:Class="PCInventory.Pages.PagesEditAdd.PageEditAddUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PCInventory.Pages.PagesEditAdd"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="950"
+      Title="PageEditAddUser">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#53699e" 
+              Grid.Row="0">
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Margin="5">
+                <Label Content="Добавление / Редактирование" 
+                       Style="{StaticResource LblDevices}"/>
+            </WrapPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <WrapPanel Grid.Row="0"
+                           HorizontalAlignment="Stretch">
+
+                    <Rectangle Width="30"/>
+
+                    <TextBlock Text="Сотрудник" 
+                               Style="{StaticResource TxblTitle}"
+                               Foreground="Black" 
+                               HorizontalAlignment="Center"/>
+                </WrapPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0"
+                  Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Фамилия" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    <TextBox x:Name="TxbUserSurname" 
+                             Text="{Binding UserSurname}" 
+                             Style="{StaticResource TxtBoxEditAdd}" 
+                             HorizontalAlignment="Stretch"
+                             Height="35"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Имя" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    <TextBox x:Name="TxbUserName" 
+                             Text="{Binding UserName}" 
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             Height="35"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Отчество" 
+                               Style="{StaticResource TxtBlEditAdd}" 
+                               Margin="5"/>
+                    <TextBox x:Name="TxbUserPatronymic" 
+                             Text="{Binding UserPatronymic}" 
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             HorizontalAlignment="Stretch"
+                             Height="35"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Роль" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    <ComboBox x:Name="CmbRole" 
+                              DisplayMemberPath="RoleName" 
+                              SelectedItem="{Binding Role}" 
+                              Style="{StaticResource ComBoxEditAdd}"
+                              Height="35"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="2"
+                  Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="2">
+                    <TextBlock Text="Телефон" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    
+                    <TextBox x:Name="TxbUserPhone" 
+                             Text="{Binding UserPhone}" 
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             Height="35"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="2">
+                    <TextBlock Text="Логин" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    
+                    <TextBox x:Name="TxbUserLogin" 
+                             Text="{Binding UserLogin}" 
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             Height="35"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="2">
+                    <TextBlock Text="Пароль" 
+                               Style="{StaticResource TxtBlEditAdd}" />
+                    <TextBox x:Name="TxbUserPassword" 
+                             Text="{Binding UserPassword}" 
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             Height="35"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="2">
+                    <TextBlock Text="Рабочее место" 
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    
+                    <ComboBox x:Name="CmbWorkplace" 
+                              DisplayMemberPath="WorkplaceName" 
+                              SelectedItem="{Binding Workplace}" 
+                              Style="{StaticResource ComBoxEditAdd}"
+                              Height="35"/>
+                </StackPanel>
+            </Grid>
+
+            <WrapPanel HorizontalAlignment="Right" 
+                       VerticalAlignment="Bottom"
+                       Grid.Row="3" Grid.Column="1">
+                <Button x:Name="BtnSave" Click="BtnSave_Click" 
+                        Style="{StaticResource BtnSaveBack}"
+                        >
+                    <WrapPanel>
+                        <Image Source="/Resources/ImgSave.png" 
+                               Style="{StaticResource ImgMenu}"/>
+                        <TextBlock Text="Сохранить" 
+                                   Style="{StaticResource TxtBlEditAdd}"/>
+                    </WrapPanel>
+                </Button>
+
+                <Button x:Name="BtnBack" Click="BtnBack_Click" 
+                        Style="{StaticResource BtnSaveBack}" 
+                        Margin="5" 
+                        Cursor="Hand">
+                    <WrapPanel>
+                        <Image Source="/Resources/ImgBack.png" 
+                               Style="{StaticResource ImgMenu}"/>
+                        <TextBlock Text="Назад" 
+                                   Style="{StaticResource TxtBlEditAdd}"/>
+                    </WrapPanel>
+                </Button>
+            </WrapPanel>
+        </Grid>
+
+
+    </Grid>
+
+</Page>

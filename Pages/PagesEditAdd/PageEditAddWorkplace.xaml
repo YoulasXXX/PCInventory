@@ -1,0 +1,104 @@
+﻿<Page x:Class="PCInventory.Pages.PagesEditAdd.PageEditAddWorkplace"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PCInventory.Pages.PagesEditAdd"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="950"
+      Title="PageEditAddWorkplace">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#53699e"
+                Grid.Row="0">
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Margin="5">
+
+                <Label Content="Добавление / Редактирование" x:Name="LblAdd"
+                        Style="{StaticResource LblDevices}"/>
+            </WrapPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+              Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <WrapPanel Grid.Row="0"
+                           HorizontalAlignment="Stretch">
+
+                    <Rectangle Width="30"/>
+
+                    <TextBlock Text="Рабочее место" 
+                               Style="{StaticResource TxblTitle}"
+                               Foreground="Black" 
+                               HorizontalAlignment="Center"/>
+                </WrapPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Наименование"
+                               Style="{StaticResource TxtBlEditAdd}"/>
+                    
+                    <TextBox x:Name="TxbWorkplaceName"
+                             Text="{Binding WorkplaceName}"
+                             Style="{StaticResource TxtBoxEditAdd}"
+                             Height="35"/>
+                </StackPanel>
+
+            </Grid>
+            
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Margin="5"
+                        Grid.Row="3">
+                <Button x:Name="BtnSave" Click="BtnSave_Click"
+                            Style="{StaticResource BtnSaveBack}"
+                            Margin="5">
+                    <WrapPanel>
+                        <Image Source="/Resources/ImgSave.png"
+                                Style="{StaticResource ImgMenu}"/>
+                        <TextBlock Text="Сохранить" 
+                                Style="{StaticResource TxtBlEditAdd}"/>
+                    </WrapPanel>
+                </Button>
+
+                <Button x:Name="BtnBack" Click="BtnBack_Click"
+                            Style="{StaticResource BtnSaveBack}">
+                    <WrapPanel>
+                        <Image Source="/Resources/ImgBack.png"
+                                Style="{StaticResource ImgMenu}"/>
+                        <TextBlock Text="Назад"
+                                Style="{StaticResource TxtBlEditAdd}"/>
+                    </WrapPanel>
+                </Button>
+            </WrapPanel>
+        </Grid>
+        
+
+
+    </Grid>
+</Page>
